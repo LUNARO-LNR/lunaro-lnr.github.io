@@ -1,0 +1,1423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#070b18">
+
+  <title>LUNARO — LNR Ecosystem</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at 20% 10%, rgba(74, 72, 255, 0.18), transparent 30%),
+        radial-gradient(circle at 80% 20%, rgba(0, 180, 255, 0.12), transparent 28%),
+        linear-gradient(180deg, #070b18 0%, #0b1024 45%, #070b18 100%);
+      color: #ffffff;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      width: min(1180px, calc(100% - 40px));
+      margin: auto;
+    }
+
+    /* NAVBAR */
+
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: rgba(7, 11, 24, 0.82);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .nav-inner {
+      height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+
+    .brand-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, #55d7ff, #6e57ff);
+      box-shadow: 0 0 25px rgba(74, 135, 255, 0.45);
+      font-size: 20px;
+    }
+
+    .brand-text span {
+      display: block;
+      font-size: 16px;
+    }
+
+    .brand-text small {
+      display: block;
+      font-size: 9px;
+      color: #8d98b5;
+      letter-spacing: 2px;
+      margin-top: 2px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .nav-links a {
+      color: #aeb8d0;
+      font-size: 14px;
+      transition: 0.25s;
+    }
+
+    .nav-links a:hover {
+      color: #ffffff;
+    }
+
+    .nav-launch {
+      padding: 11px 18px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #4e83ff, #7658ff);
+      color: white !important;
+      box-shadow: 0 8px 25px rgba(79, 101, 255, 0.28);
+    }
+
+    /* HERO */
+
+    .hero {
+      min-height: 760px;
+      padding-top: 150px;
+      display: flex;
+      align-items: center;
+      text-align: center;
+      position: relative;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      left: 50%;
+      top: 100px;
+      transform: translateX(-50%);
+      background: radial-gradient(circle, rgba(71, 101, 255, 0.18), transparent 68%);
+      pointer-events: none;
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(55, 77, 140, 0.18);
+      border: 1px solid rgba(120, 145, 255, 0.2);
+      color: #aab8e5;
+      font-size: 12px;
+      margin-bottom: 28px;
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #42e8a4;
+      box-shadow: 0 0 12px #42e8a4;
+    }
+
+    .hero-logo {
+      width: 112px;
+      height: 112px;
+      border-radius: 50%;
+      margin: 0 auto 25px;
+      display: grid;
+      place-items: center;
+      font-size: 52px;
+      background:
+        radial-gradient(circle at 30% 25%, #ffffff 0%, #b7e7ff 8%, #6277ff 42%, #3325a7 100%);
+      box-shadow:
+        0 0 40px rgba(71, 105, 255, 0.5),
+        inset 0 0 25px rgba(255,255,255,0.25);
+      border: 2px solid rgba(255,255,255,0.16);
+    }
+
+    .hero h1 {
+      font-size: clamp(54px, 9vw, 100px);
+      line-height: 0.95;
+      letter-spacing: -4px;
+      font-weight: 900;
+      background: linear-gradient(135deg, #ffffff 15%, #8bdcff 45%, #7b6cff 85%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 24px;
+    }
+
+    .hero p {
+      max-width: 680px;
+      margin: auto;
+      color: #9ca8c5;
+      font-size: 17px;
+      line-height: 1.8;
+    }
+
+    .hero-buttons {
+      margin-top: 34px;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 175px;
+      padding: 15px 23px;
+      border-radius: 14px;
+      font-weight: 700;
+      font-size: 14px;
+      transition: 0.25s;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #4e83ff, #7658ff);
+      box-shadow: 0 12px 35px rgba(78, 100, 255, 0.3);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.045);
+      border: 1px solid rgba(255,255,255,0.11);
+      color: #d9e0f5;
+    }
+
+    /* STATS */
+
+    .stats {
+      margin-top: -40px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    .stat-card {
+      padding: 25px 20px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.035);
+      border: 1px solid rgba(255,255,255,0.075);
+      text-align: center;
+      backdrop-filter: blur(15px);
+    }
+
+    .stat-value {
+      font-size: 22px;
+      font-weight: 800;
+      margin-bottom: 7px;
+    }
+
+    .stat-label {
+      color: #78849f;
+      font-size: 12px;
+    }
+
+    /* GENERAL */
+
+    section {
+      padding: 110px 0;
+    }
+
+    .section-head {
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto 55px;
+    }
+
+    .section-head h2 {
+      font-size: clamp(32px, 5vw, 52px);
+      margin-bottom: 16px;
+      letter-spacing: -1px;
+    }
+
+    .section-head p {
+      color: #8f9ab5;
+      line-height: 1.8;
+    }
+
+    /* ABOUT */
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .glass-card {
+      background: rgba(255,255,255,0.035);
+      border: 1px solid rgba(255,255,255,0.075);
+      border-radius: 24px;
+      padding: 30px;
+      backdrop-filter: blur(14px);
+    }
+
+    .glass-card h3 {
+      font-size: 22px;
+      margin-bottom: 15px;
+    }
+
+    .glass-card p {
+      color: #909bb6;
+      line-height: 1.8;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 13px;
+      margin-top: 22px;
+    }
+
+    .feature {
+      padding: 17px;
+      border-radius: 15px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.05);
+      color: #cbd3e8;
+      font-size: 13px;
+    }
+
+    .feature strong {
+      display: block;
+      color: white;
+      margin-bottom: 5px;
+    }
+
+    /* HOW IT WORKS */
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .step {
+      position: relative;
+      padding: 28px 22px;
+      border-radius: 22px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.02));
+      border: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .step-number {
+      font-size: 12px;
+      color: #7185ff;
+      margin-bottom: 20px;
+      font-weight: 800;
+    }
+
+    .step h3 {
+      margin-bottom: 10px;
+      font-size: 18px;
+    }
+
+    .step p {
+      color: #8792ad;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    /* TOKEN */
+
+    .token-box {
+      display: grid;
+      grid-template-columns: 0.8fr 1.2fr;
+      gap: 30px;
+      align-items: stretch;
+    }
+
+    .coin-card {
+      min-height: 390px;
+      border-radius: 28px;
+      background:
+        radial-gradient(circle at 50% 35%, rgba(88,110,255,0.25), transparent 40%),
+        rgba(255,255,255,0.035);
+      border: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .coin {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-size: 38px;
+      font-weight: 900;
+      background:
+        radial-gradient(circle at 30% 25%, #ffffff, #9fe1ff 12%, #6577ff 45%, #3323a8 100%);
+      box-shadow:
+        0 0 55px rgba(78, 104, 255, 0.5),
+        inset 0 0 25px rgba(255,255,255,0.28);
+      border: 3px solid rgba(255,255,255,0.18);
+      margin-bottom: 25px;
+    }
+
+    .coin-card h3 {
+      font-size: 25px;
+    }
+
+    .coin-card span {
+      color: #7d89a5;
+      font-size: 13px;
+      margin-top: 7px;
+    }
+
+    .token-info {
+      display: grid;
+      gap: 12px;
+    }
+
+    .info-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: center;
+      padding: 20px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.035);
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .info-row span:first-child {
+      color: #7f8aa6;
+      font-size: 13px;
+    }
+
+    .info-row span:last-child {
+      color: #e6ebf8;
+      font-weight: 700;
+      text-align: right;
+      word-break: break-word;
+    }
+
+    .contract {
+      font-size: 11px !important;
+      max-width: 420px;
+      line-height: 1.5;
+    }
+
+    .explorer-btn {
+      margin-top: 5px;
+      width: 100%;
+    }
+
+    /* TOKENOMICS */
+
+    .tokenomics {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+    }
+
+    .allocation {
+      padding: 25px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.035);
+      border: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .allocation-percent {
+      font-size: 34px;
+      font-weight: 900;
+      margin-bottom: 8px;
+    }
+
+    .allocation h3 {
+      font-size: 15px;
+      margin-bottom: 8px;
+    }
+
+    .allocation p {
+      color: #7e8aa5;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .token-note {
+      margin-top: 20px;
+      padding: 18px;
+      border-radius: 15px;
+      background: rgba(82, 105, 255, 0.07);
+      border: 1px solid rgba(100, 120, 255, 0.1);
+      color: #8894b1;
+      font-size: 12px;
+      line-height: 1.7;
+      text-align: center;
+    }
+
+    /* TRANSPARENCY */
+
+    .transparency-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .transparency-card {
+      padding: 28px;
+      border-radius: 22px;
+      background: rgba(255,255,255,0.035);
+      border: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .transparency-card h3 {
+      margin-bottom: 10px;
+    }
+
+    .transparency-card p {
+      color: #858fa9;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    /* ROADMAP */
+
+    .roadmap {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .phase {
+      padding: 28px 22px;
+      border-radius: 22px;
+      background: rgba(255,255,255,0.035);
+      border: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .phase-label {
+      font-size: 11px;
+      color: #7285ff;
+      font-weight: 800;
+      letter-spacing: 1px;
+      margin-bottom: 14px;
+    }
+
+    .phase h3 {
+      margin-bottom: 15px;
+    }
+
+    .phase ul {
+      list-style: none;
+    }
+
+    .phase li {
+      color: #8a95ae;
+      font-size: 12px;
+      line-height: 1.7;
+      margin-bottom: 7px;
+    }
+
+    .phase li::before {
+      content: "✓";
+      color: #637aff;
+      margin-right: 8px;
+    }
+
+    /* COMMUNITY */
+
+    .community {
+      text-align: center;
+      padding: 80px 25px;
+      border-radius: 30px;
+      background:
+        radial-gradient(circle at center, rgba(74,94,255,0.17), transparent 55%),
+        rgba(255,255,255,0.025);
+      border: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .community h2 {
+      font-size: clamp(30px, 5vw, 50px);
+      margin-bottom: 15px;
+    }
+
+    .community p {
+      color: #8d98b2;
+      max-width: 600px;
+      margin: auto;
+      line-height: 1.8;
+    }
+
+    .community-buttons {
+      margin-top: 30px;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    /* FOOTER */
+
+    footer {
+      border-top: 1px solid rgba(255,255,255,0.07);
+      padding: 35px 0;
+      margin-top: 100px;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .copyright {
+      color: #65708a;
+      font-size: 12px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 20px;
+      color: #8994ae;
+      font-size: 12px;
+    }
+
+    .footer-links a:hover {
+      color: white;
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 850px) {
+
+      .nav-links {
+        display: none;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .about-grid,
+      .token-box {
+        grid-template-columns: 1fr;
+      }
+
+      .steps,
+      .roadmap {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .tokenomics {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .transparency-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 560px) {
+
+      .container {
+        width: min(100% - 24px, 1180px);
+      }
+
+      .hero {
+        min-height: 700px;
+        padding-top: 125px;
+      }
+
+      .hero h1 {
+        letter-spacing: -2px;
+      }
+
+      .hero p {
+        font-size: 14px;
+      }
+
+      .stats-grid {
+        gap: 9px;
+      }
+
+      .stat-card {
+        padding: 18px 10px;
+      }
+
+      .stat-value {
+        font-size: 17px;
+      }
+
+      section {
+        padding: 75px 0;
+      }
+
+      .features,
+      .steps,
+      .roadmap,
+      .tokenomics {
+        grid-template-columns: 1fr;
+      }
+
+      .glass-card {
+        padding: 23px;
+      }
+
+      .info-row {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .info-row span:last-child {
+        text-align: left;
+      }
+
+      .contract {
+        font-size: 10px !important;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .footer-links {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+
+  <nav class="navbar">
+    <div class="container nav-inner">
+
+      <a href="#home" class="brand">
+        <div class="brand-icon">◐</div>
+
+        <div class="brand-text">
+          <span>LUNARO</span>
+          <small>LNR ECOSYSTEM</small>
+        </div>
+      </a>
+
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#token">Token</a>
+        <a href="#roadmap">Roadmap</a>
+        <a href="#community">Community</a>
+
+        <!-- LAUNCH LUNARO = BOT -->
+        <a
+          href="https://t.me/LunaroGameBot"
+          target="_blank"
+          class="nav-launch"
+        >
+          Launch App
+        </a>
+      </div>
+
+    </div>
+  </nav>
+
+
+  <!-- HERO -->
+
+  <section class="hero" id="home">
+
+    <div class="container">
+
+      <div class="status">
+        <span class="status-dot"></span>
+        Built on TON Mainnet
+      </div>
+
+      <div class="hero-logo">
+        ◐
+      </div>
+
+      <h1>LUNARO</h1>
+
+      <p>
+        A next-generation Telegram Web3 ecosystem powered by
+        LUNARO (LNR), built on the TON Mainnet.
+      </p>
+
+      <div class="hero-buttons">
+
+        <!-- LAUNCH LUNARO = BOT -->
+        <a
+          href="https://t.me/LunaroGameBot"
+          target="_blank"
+          class="btn btn-primary"
+        >
+          🚀 Launch LUNARO
+        </a>
+
+        <!-- TELEGRAM CHANNEL -->
+        <a
+          href="https://t.me/LNRminer"
+          target="_blank"
+          class="btn btn-secondary"
+        >
+          📢 Telegram Channel
+        </a>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- STATS -->
+
+  <section class="stats">
+
+    <div class="container">
+
+      <div class="stats-grid">
+
+        <div class="stat-card">
+          <div class="stat-value">LNR</div>
+          <div class="stat-label">Token Symbol</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-value">TON</div>
+          <div class="stat-label">Blockchain</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-value">11B</div>
+          <div class="stat-label">Total Supply</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-value">Telegram</div>
+          <div class="stat-label">Mini App Ecosystem</div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ABOUT -->
+
+  <section id="about">
+
+    <div class="container">
+
+      <div class="section-head">
+        <h2>About LUNARO</h2>
+
+        <p>
+          LUNARO is a Telegram-focused Web3 ecosystem designed
+          around LNR mining, wallet connectivity, rewards,
+          referrals and automated withdrawals on TON.
+        </p>
+      </div>
+
+      <div class="about-grid">
+
+        <div class="glass-card">
+
+          <h3>LUNARO Ecosystem</h3>
+
+          <p>
+            LUNARO combines a Telegram Mini App with the LNR
+            token ecosystem, allowing users to connect their
+            TON wallet, mine LNR, claim rewards and manage
+            their assets.
+          </p>
+
+          <div class="features">
+
+            <div class="feature">
+              <strong>⛏ LNR Mining</strong>
+              Automated LNR mining system
+            </div>
+
+            <div class="feature">
+              <strong>👛 TON Wallet</strong>
+              Wallet connection support
+            </div>
+
+            <div class="feature">
+              <strong>🎁 LNR Claim</strong>
+              Claim accumulated rewards
+            </div>
+
+            <div class="feature">
+              <strong>👥 Referral</strong>
+              Community referral system
+            </div>
+
+            <div class="feature">
+              <strong>⚡ Automated Withdrawals</strong>
+              Automated withdrawal system
+            </div>
+
+            <div class="feature">
+              <strong>🔗 TON Mainnet</strong>
+              Built on TON Mainnet
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="glass-card">
+
+          <h3>Start with LUNARO</h3>
+
+          <p>
+            Join the LUNARO ecosystem through Telegram and
+            start exploring the LNR ecosystem.
+          </p>
+
+          <div style="margin-top:25px;">
+
+            <!-- MINI APP / CHANNEL -->
+            <a
+              href="https://t.me/LNRminer"
+              target="_blank"
+              class="btn btn-secondary"
+              style="width:100%;"
+            >
+              📢 Open Telegram Channel
+            </a>
+
+            <br>
+
+            <!-- BOT -->
+            <a
+              href="https://t.me/LunaroGameBot"
+              target="_blank"
+              class="btn btn-primary"
+              style="width:100%;"
+            >
+              🚀 Open LUNARO Bot
+            </a>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- HOW IT WORKS -->
+
+  <section>
+
+    <div class="container">
+
+      <div class="section-head">
+
+        <h2>How It Works</h2>
+
+        <p>
+          A simple path into the LUNARO ecosystem.
+        </p>
+
+      </div>
+
+      <div class="steps">
+
+        <div class="step">
+          <div class="step-number">STEP 01</div>
+          <h3>Connect Wallet</h3>
+          <p>
+            Connect your TON-compatible wallet before using
+            the mining system.
+          </p>
+        </div>
+
+        <div class="step">
+          <div class="step-number">STEP 02</div>
+          <h3>Mine LNR</h3>
+          <p>
+            Start accumulating LNR through the LUNARO ecosystem.
+          </p>
+        </div>
+
+        <div class="step">
+          <div class="step-number">STEP 03</div>
+          <h3>Claim Rewards</h3>
+          <p>
+            Claim your accumulated mining rewards into your balance.
+          </p>
+        </div>
+
+        <div class="step">
+          <div class="step-number">STEP 04</div>
+          <h3>Hold LNR</h3>
+          <p>
+            Manage your LNR assets within the TON ecosystem.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- TOKEN -->
+
+  <section id="token">
+
+    <div class="container">
+
+      <div class="section-head">
+
+        <h2>LUNARO Token</h2>
+
+        <p>
+          Official LNR token information on the TON Mainnet.
+        </p>
+
+      </div>
+
+
+      <div class="token-box">
+
+        <div class="coin-card">
+
+          <div class="coin">
+            LNR
+          </div>
+
+          <h3>LUNARO</h3>
+
+          <span>LNR · TON Mainnet</span>
+
+        </div>
+
+
+        <div class="token-info">
+
+          <div class="info-row">
+            <span>Token Name</span>
+            <span>LUNARO</span>
+          </div>
+
+          <div class="info-row">
+            <span>Symbol</span>
+            <span>LNR</span>
+          </div>
+
+          <div class="info-row">
+            <span>Network</span>
+            <span>TON Mainnet</span>
+          </div>
+
+          <div class="info-row">
+            <span>Total Supply</span>
+            <span>11,000,000,000 LNR</span>
+          </div>
+
+          <div class="info-row">
+            <span>Jetton Master</span>
+
+            <span class="contract">
+              EQArZiLoiwGQVFXf-xypL_3qBg6DYuOQTHNJhOmEju-LNPuk
+            </span>
+          </div>
+
+          <!-- TON EXPLORER -->
+
+          <a
+            href="https://tonviewer.com/EQArZiLoiwGQVFXf-xypL_3qBg6DYuOQTHNJhOmEju-LNPuk"
+            target="_blank"
+            class="btn btn-secondary explorer-btn"
+          >
+            🔎 View Jetton Master
+          </a>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- TOKENOMICS -->
+
+  <section>
+
+    <div class="container">
+
+      <div class="section-head">
+
+        <h2>Tokenomics</h2>
+
+        <p>
+          LUNARO total supply allocation.
+        </p>
+
+      </div>
+
+      <div class="tokenomics">
+
+        <div class="allocation">
+
+          <div class="allocation-percent">70%</div>
+
+          <h3>Mining / Claim</h3>
+
+          <p>
+            7.7B LNR allocated to the mining and claim ecosystem.
+          </p>
+
+        </div>
+
+
+        <div class="allocation">
+
+          <div class="allocation-percent">10%</div>
+
+          <h3>Liquidity</h3>
+
+          <p>
+            1.1B LNR allocated for liquidity.
+          </p>
+
+        </div>
+
+
+        <div class="allocation">
+
+          <div class="allocation-percent">10%</div>
+
+          <h3>Community / Airdrop / Referral</h3>
+
+          <p>
+            1.1B LNR allocated for community growth,
+            airdrops and referrals.
+          </p>
+
+        </div>
+
+
+        <div class="allocation">
+
+          <div class="allocation-percent">10%</div>
+
+          <h3>User Balances</h3>
+
+          <p>
+            1.1B LNR assigned to user balances and
+            unwithdrawn amounts.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="token-note">
+
+        Total allocation: 100% · 11,000,000,000 LNR
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- TRANSPARENCY -->
+
+  <section>
+
+    <div class="container">
+
+      <div class="section-head">
+
+        <h2>Transparency</h2>
+
+        <p>
+          Key information about the LUNARO ecosystem
+          is presented openly.
+        </p>
+
+      </div>
+
+      <div class="transparency-grid">
+
+        <div class="transparency-card">
+
+          <h3>⛏ Mining Balance</h3>
+
+          <p>
+            Mining and claim activity is designed around
+            the LUNARO Telegram ecosystem.
+          </p>
+
+        </div>
+
+
+        <div class="transparency-card">
+
+          <h3>🔗 On-Chain Holdings</h3>
+
+          <p>
+            LNR exists on the TON Mainnet and can be
+            tracked through the Jetton Master.
+          </p>
+
+        </div>
+
+
+        <div class="transparency-card">
+
+          <h3>📊 Public Information</h3>
+
+          <p>
+            Token name, symbol, network, supply and
+            Jetton Master are publicly presented.
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ROADMAP -->
+
+  <section id="roadmap">
+
+    <div class="container">
+
+      <div class="section-head">
+
+        <h2>Roadmap</h2>
+
+        <p>
+          The long-term development path of LUNARO.
+        </p>
+
+      </div>
+
+
+      <div class="roadmap">
+
+        <div class="phase">
+
+          <div class="phase-label">PHASE 01</div>
+
+          <h3>Foundation</h3>
+
+          <ul>
+            <li>LUNARO token</li>
+            <li>TON Mainnet</li>
+            <li>Telegram Mini App</li>
+            <li>LNR mining</li>
+            <li>Wallet connection</li>
+            <li>Claim system</li>
+          </ul>
+
+        </div>
+
+
+        <div class="phase">
+
+          <div class="phase-label">PHASE 02</div>
+
+          <h3>Ecosystem Growth</h3>
+
+          <ul>
+            <li>Community expansion</li>
+            <li>Referral growth</li>
+            <li>Mining improvements</li>
+            <li>User growth</li>
+          </ul>
+
+        </div>
+
+
+        <div class="phase">
+
+          <div class="phase-label">PHASE 03</div>
+
+          <h3>Ecosystem Expansion</h3>
+
+          <ul>
+            <li>New ecosystem features</li>
+            <li>Partnership opportunities</li>
+            <li>Utility expansion</li>
+            <li>Platform improvements</li>
+          </ul>
+
+        </div>
+
+
+        <div class="phase">
+
+          <div class="phase-label">PHASE 04</div>
+
+          <h3>Global Growth</h3>
+
+          <ul>
+            <li>Global community</li>
+            <li>Broader adoption</li>
+            <li>New integrations</li>
+            <li>Long-term ecosystem growth</li>
+          </ul>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- COMMUNITY -->
+
+  <section id="community">
+
+    <div class="container">
+
+      <div class="community">
+
+        <h2>Join LUNARO</h2>
+
+        <p>
+          Enter the LUNARO ecosystem through Telegram
+          and follow the latest project updates.
+        </p>
+
+
+        <div class="community-buttons">
+
+          <!-- BOT -->
+          <a
+            href="https://t.me/LunaroGameBot"
+            target="_blank"
+            class="btn btn-primary"
+          >
+            🤖 Launch LUNARO
+          </a>
+
+          <!-- CHANNEL -->
+          <a
+            href="https://t.me/LNRminer"
+            target="_blank"
+            class="btn btn-secondary"
+          >
+            📢 Telegram Channel
+          </a>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- FOOTER -->
+
+  <footer>
+
+    <div class="container footer-inner">
+
+      <div class="copyright">
+        © 2026 LUNARO · LNR Ecosystem
+      </div>
+
+      <div class="footer-links">
+
+        <a href="#about">About</a>
+
+        <a href="#token">Token</a>
+
+        <a href="#roadmap">Roadmap</a>
+
+        <!-- CHANNEL -->
+        <a
+          href="https://t.me/LNRminer"
+          target="_blank"
+        >
+          Telegram Channel
+        </a>
+
+      </div>
+
+    </div>
+
+  </footer>
+
+</body>
+</html>
